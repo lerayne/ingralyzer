@@ -6,8 +6,9 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const HTMLPlugin = require('html-webpack-plugin')
 
-const publicPath = 'http://localhost:8050/public/assets';
+const publicPath = 'http://localhost:8050/public';
 // const cssName            = PROD ? 'styles-[hash].css' : 'styles.css';
 // const jsName             = PROD ? 'bundle-[hash].js' : 'bundle.js';
 const cssName = 'styles.css';
@@ -48,6 +49,11 @@ module.exports = function (env) {
 
     if (DEV) {
         babelOptions.plugins.push('react-hot-loader/babel')
+
+        /*plugins.push(new HTMLPlugin({
+            template:'./index.html',
+            inject:false
+        }))*/
     }
 
     if (PROD) {

@@ -3,11 +3,33 @@
  */
 
 import express from 'express'
+import url from 'url'
+import {getIGAuth} from './server/secutity/auth'
+import {mainURL} from 'config'
+
 
 // создаем центральный апп
 const app = express()
 
 app.use(express.static('public'))
+
+app.get('/auth', async(req, res) => {
+
+    const reqURL = url.parse(req.url, true)
+
+    if (reqURL.query && reqURL.query.code) {
+
+        const response = await getIGAuth(reqURL.query.code)
+
+        if (response.access_token) {
+            res.redirect(302, mainURL + '/?token=' + response.access_token)
+        } else {
+            res.end(response)
+        }
+    } else {
+        res.end('missing "code" URL param')
+    }
+})
 
 const PORT = process.env.LISTEN || 3002
 

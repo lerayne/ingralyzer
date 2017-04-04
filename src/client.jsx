@@ -4,12 +4,13 @@
 
 import 'babel-polyfill'
 import React      from 'react'
-import ReactDOM   from 'react-dom'
+import {render}   from 'react-dom'
+
+import MainView from './shared/containers/MainView'
 
 document.addEventListener('DOMContentLoaded', () => {
-    ReactDOM.render(
-        <div className="root">test</div>,
-
+    render(
+        <MainView />,
         document.getElementById('react-view')
     )
 })
