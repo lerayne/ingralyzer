@@ -1,0 +1,44 @@
+{
+  "name": "ingralyzer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod-client": "webpack --env.mode=production --config=webpack.config.client.js --progress",
+    "prod-server": "webpack --env.mode=production --config=webpack.config.server.js --progress"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lerayne/ingralyzer.git"
+  },
+  "author": "Michael Yegorov <lerayne@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lerayne/ingralyzer/issues"
+  },
+  "homepage": "https://github.com/lerayne/ingralyzer#readme",
+  "devDependencies": {
+    "babel-core": "6.24.0",
+    "babel-loader": "6.4.1",
+    "babel-preset-env": "1.3.2",
+    "babel-preset-react": "6.23.0",
+    "babel-preset-react-optimize": "1.0.1",
+    "babel-preset-stage-0": "6.22.0",
+    "css-loader": "0.28.0",
+    "extract-text-webpack-plugin": "2.1.0",
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "style-loader": "0.16.1",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglifyjs-webpack-plugin": "0.4.0",
+    "url-loader": "0.5.8",
+    "webpack": "2.3.3",
+    "webpack-bundle-analyzer": "2.3.1",
+    "webpack-node-externals": "1.5.4"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.23.0",
+    "express": "4.15.2"
+  }
+}

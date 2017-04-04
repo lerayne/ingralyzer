@@ -1,0 +1,7 @@
+/node_modules
+/public
+/.idea
+/ingralyzer*.sql
+/ingralyzer.js
+
+/*.log
