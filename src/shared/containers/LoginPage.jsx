@@ -2,7 +2,7 @@
  * Created by M. Yegorov on 2017-04-05.
  */
 import React, {Component} from "react";
-import {Button} from 'antd'
+import {Button, Alert} from 'antd'
 import url from 'url'
 //local
 import {clientID, mainURL} from "../../../config";
@@ -25,8 +25,16 @@ class LoginPage extends Component {
     static anonymousRequired = true
 
     render() {
+
+        const {location} = this.props
+
         return <div className={css.main}>
             <div className="login-form">
+
+                {location.query.error && <Alert
+                    type="error"
+                    message={location.query.error}
+                />}
 
                 <a href={loginUrl + '&scope=follower_list+public_content'}>
                     <Button type="primary" size="large">

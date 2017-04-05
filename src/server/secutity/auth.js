@@ -15,9 +15,6 @@ export function getIGAuth(code){
         redirect_uri: mainURL + '/auth'
     })
 
-    console.log('clientID', clientID)
-    console.log('post_data', post_data)
-
     return new Promise((resolve, reject) => {
         const post_req = https.request({
             hostname: 'api.instagram.com',
