@@ -76,11 +76,11 @@ module.exports = function (env) {
             comments: false
         }))
 
-        /*plugins.push(new BundleAnalyzer({
+        plugins.push(new BundleAnalyzer({
             analyzerMode:'static',
             reportFilename: 'webpack-analysis.html',
             openAnalyzer: false
-        }))*/
+        }))
 
         babelOptions.presets.push('react-optimize')
     }
