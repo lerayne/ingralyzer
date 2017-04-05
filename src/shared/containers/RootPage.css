@@ -1,0 +1,40 @@
+*, :before, :after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0.1px; /* remove margin empty offsets */
+}
+
+h1,h2,h3 {
+    font-family: 'Roboto Slab', serif;
+}
+
+:local(.main) {
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+:local(.main) .content-width {
+    width: 960px;
+    margin: auto;
+}
+
+:local(.header) {
+    text-align: center;
+    height: 220px;
+    background-color: transparent;
+}
+
+:local(.header) h1 {
+    font-weight: 300;
+    font-size: 50px;
+    margin: 1em 0 0.3em;
+}
+
+:local(.header) h2 {
+    font-size: 20px;
+    line-height: normal;
+}

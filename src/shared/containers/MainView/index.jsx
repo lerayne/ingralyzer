@@ -1,21 +1,23 @@
 /**
  * Created by M. Yegorov on 2017-04-04.
  */
-
-import React, {Component} from 'react'
-import url from 'url'
-import {clientID, mainURL} from '../../../../config'
+import React, {Component} from "react";
+import url from "url";
+import {clientID, mainURL} from "../../../../config";
+import fetchJsonp from "fetch-jsonp";
 
 function LoginPage(){
     return <div>
-        <a href={`https://api.instagram.com/oauth/authorize/?client_id=${clientID}&redirect_uri=${encodeURIComponent(mainURL+'/auth')}&response_type=code&scope=follower_list`}>Login</a>
+        <a href={`https://api.instagram.com/oauth/authorize/?client_id=${clientID}&redirect_uri=${encodeURIComponent(mainURL+'/auth')}&response_type=code&-client`}>Login</a>
     </div>
 }
 
 export default class MainView extends Component {
 
     componentDidMount(){
-
+        window.callbackFunction = function(data){
+            console.log('JSONP', data)
+        }
     }
 
     render(){
@@ -34,9 +36,11 @@ export default class MainView extends Component {
         }
     }
 
-    requestSubscriptions(token){
-        fetch('https://api.instagram.com/v1/users/self/follows?access_token=' + token, {
-            mode:'no-cors'
-        }).then(resp => resp.json()).then(json => console.log(json))
+    async requestSubscriptions(token){
+
+        const resp = await fetchJsonp('https://api.instagram.com/v1/users/self?access_token=' + token)
+        const json = await resp.json()
+        console.log('JSONP', json)
+
     }
 }

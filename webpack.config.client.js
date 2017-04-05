@@ -44,7 +44,13 @@ module.exports = function (env) {
             "react",
             "stage-0"
         ],
-        plugins:[]
+        plugins:[
+            "transform-runtime",
+            ["import", {
+                libraryName: "antd",
+                style: "css"
+            }]
+        ]
     }
 
     if (DEV) {

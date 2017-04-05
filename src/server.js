@@ -1,11 +1,10 @@
 /**
  * Created by M. Yegorov on 2017-04-04.
  */
-
-import express from 'express'
-import url from 'url'
-import {getIGAuth} from './server/secutity/auth'
-import {mainURL} from 'config'
+import express from "express";
+import url from "url";
+import {getIGAuth} from "./server/secutity/auth";
+import {mainURL} from "config";
 
 
 // создаем центральный апп
@@ -30,6 +29,8 @@ app.get('/auth', async(req, res) => {
         res.end('missing "code" URL param')
     }
 })
+
+app.use('*', express.static('public'))
 
 const PORT = process.env.LISTEN || 3002
 
