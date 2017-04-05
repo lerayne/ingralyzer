@@ -4,6 +4,9 @@
 import React, {Component} from "react";
 
 class CategoriesPage extends Component {
+
+    static loginRequired = true
+
     render(){
         return <div>Categories</div>
     }

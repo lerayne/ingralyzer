@@ -1,0 +1,22 @@
+:local(.main) {
+
+}
+
+:local(.main) .login-form {
+    width: 300px;
+    margin: auto;
+}
+
+:local(.main) .login-form .ant-btn {
+    width: 100%;
+    padding: 8px 20px;
+    background-image: linear-gradient(-135deg,#5700c0,#b900b4,#e1003d);
+    border: none;
+}
+
+:local(.main) .login-form .ant-btn img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+    margin-right: 10px;
+}

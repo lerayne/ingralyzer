@@ -4,6 +4,9 @@
 import React, {Component} from "react";
 
 class FollowsPage extends Component {
+
+    static loginRequired = true
+
     render(){
         return <div>Follows</div>
     }

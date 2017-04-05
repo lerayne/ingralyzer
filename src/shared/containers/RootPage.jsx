@@ -4,6 +4,7 @@
 import React, {Component} from "react";
 import {Link} from "react-router";
 import {Layout, Menu, Icon} from "antd";
+import {connect} from 'react-redux'
 //local
 import css from "./RootPage.css";
 
@@ -17,14 +18,16 @@ function TopMenuItem({children, link, icon}) {
 
 class RootPage extends Component {
     render() {
-        const {location, children} = this.props
+        const {location, children, user} = this.props
+
+        const AUTHED = user.id !== -1
 
         return <Layout className={css.main}>
             <Header className={css.header}>
                 <h1>Ingralyzer</h1>
                 <h2>Improve your IG experience!</h2>
 
-                <div className="content-width">
+                {AUTHED && <div className="content-width">
                     <Menu
                         mode="horizontal"
                         selectedKeys={[location.pathname, location.pathname.replace(/\/$/, '')]}
@@ -32,7 +35,7 @@ class RootPage extends Component {
                         <Menu.Item key="/"><TopMenuItem link="/" icon="contacts">Follows</TopMenuItem></Menu.Item>
                         <Menu.Item key="/categories"><TopMenuItem link="/categories" icon="tag">Categories</TopMenuItem></Menu.Item>
                     </Menu>
-                </div>
+                </div>}
             </Header>
             <Content className="content-width">
                 {children}
@@ -41,4 +44,6 @@ class RootPage extends Component {
     }
 }
 
-export default RootPage
+export default RootPage = connect(state => ({
+    user: state.user
+}))(RootPage)

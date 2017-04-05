@@ -8,7 +8,7 @@ import fetchJsonp from "fetch-jsonp";
 
 function LoginPage(){
     return <div>
-        <a href={`https://api.instagram.com/oauth/authorize/?client_id=${clientID}&redirect_uri=${encodeURIComponent(mainURL+'/auth')}&response_type=code&-client`}>Login</a>
+        <a href={}>Login</a>
     </div>
 }
 

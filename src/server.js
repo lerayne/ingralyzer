@@ -1,16 +1,14 @@
 /**
  * Created by M. Yegorov on 2017-04-04.
  */
+import "babel-polyfill";
 import express from "express";
 import url from "url";
 import {getIGAuth} from "./server/secutity/auth";
 import {mainURL} from "config";
 
-
 // создаем центральный апп
 const app = express()
-
-app.use(express.static('public'))
 
 app.get('/auth', async(req, res) => {
 
@@ -30,6 +28,7 @@ app.get('/auth', async(req, res) => {
     }
 })
 
+//app.get(/^(?!\/api\/).*$/, express.static('public'))
 app.use('*', express.static('public'))
 
 const PORT = process.env.LISTEN || 3002
