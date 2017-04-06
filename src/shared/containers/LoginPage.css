@@ -1,10 +1,11 @@
 :local(.main) {
-
+    overflow: hidden;
 }
 
 :local(.main) .login-form {
     width: 300px;
     margin: auto;
+    padding: 10px 0;
 }
 
 :local(.main) .login-form .ant-btn {
