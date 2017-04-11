@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HTMLPlugin = require('html-webpack-plugin')
 
-const publicPath = 'http://localhost:8050/public';
 // const cssName            = PROD ? 'styles-[hash].css' : 'styles.css';
 // const jsName             = PROD ? 'bundle-[hash].js' : 'bundle.js';
 const cssName = 'styles.css';
@@ -18,6 +17,9 @@ module.exports = function (env) {
 
     const PROD = env.mode === 'production'
     const DEV = env.mode === 'development'
+
+    // const publicPath = DEV ? 'http://localhost:8050/public' : '/';
+    const publicPath = 'http://localhost:3002/public'
 
     const plugins = [
         new webpack.DefinePlugin({
@@ -44,13 +46,13 @@ module.exports = function (env) {
             "react",
             "stage-0"
         ],
-        plugins:[
-            "transform-runtime",
-            ["import", {
-                libraryName: "antd",
-                style: "css"
-            }]
-        ]
+        // plugins:[
+        //     "transform-runtime",
+        //     ["import", {
+        //         libraryName: "antd",
+        //         style: "css"
+        //     }]
+        // ]
     }
 
     if (DEV) {

@@ -5,6 +5,7 @@ import "babel-polyfill";
 import express from "express";
 
 import {mainURL} from "config";
+import getHTML from './server/getHTML'
 
 //local
 import authEP from './server/endpoints/auth'
@@ -15,7 +16,11 @@ const app = express()
 app.get('/auth', authEP)
 
 //app.get(/^(?!\/api\/).*$/, express.static('public'))
-app.use('*', express.static('public'))
+app.use('/public', express.static('public'))
+
+app.use('*', (req, res) => {
+    res.send(getHTML())
+})
 
 const PORT = process.env.LISTEN || 3002
 
