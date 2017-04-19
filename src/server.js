@@ -6,12 +6,15 @@ import express from "express";
 
 import {mainURL} from "config";
 import getHTML from './server/getHTML'
+import cookieParser from 'cookie-parser'
 
 //local
 import authEP from './server/endpoints/auth'
 
 // создаем центральный апп
 const app = express()
+
+app.use(cookieParser())
 
 app.get('/auth', authEP)
 

@@ -3,7 +3,8 @@
  */
 
 export const initialFollowsStore = {
-    list:[]
+    list: [],
+    loaded: false
 }
 
 export default function followsReducer(store=initialFollowsStore, {type, payload}){

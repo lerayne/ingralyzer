@@ -4,10 +4,12 @@
 import url from "url";
 import https from 'https'
 import qs from 'querystring'
+import ms from 'ms'
 import {clientID, clientSecret, mainURL} from 'config'
 import {query} from '../db'
 
 export function getIGAuth(code){
+
     const post_data = qs.stringify({
         client_id: clientID,
         client_secret: clientSecret,
@@ -53,6 +55,7 @@ export async function grantAccess(IGAuthRes){
     // is there such user already
     const dbResp = await query('SELECT * FROM users WHERE ig_id = ?', [IGAuthRes.user.id])
 
+    // user already in the db
     if (dbResp.length) {
         const user = dbResp[0]
 
@@ -83,6 +86,14 @@ export async function grantAccess(IGAuthRes){
     }
 }
 
+const loginErrLocal = 'IG server responded. Local service error.'
+const loginErrDenied = 'Authentication denied by user'
+const loginErrCode = 'Missing the "code" param in oauth server response'
+
+function returnError(res, message){
+    res.redirect(302, mainURL + '/login?error=' + encodeURIComponent(message))
+}
+
 export default async function auth (req, res) {
 
     const reqURL = url.parse(req.url, true)
@@ -96,14 +107,22 @@ export default async function auth (req, res) {
             const user = await grantAccess(IGAuthRes)
 
             if (user) {
-                res.redirect(302, mainURL + '/?token=' + IGAuthRes.access_token)
+
+                const mainURLObj = url.parse(mainURL)
+
+                res.cookie('access_token', user.access_token, {
+                    path: '/',
+                    domain: mainURLObj.hostname,
+                    maxAge: ms('7 days')
+                })
+                res.redirect(302, mainURL)
             } else {
-                res.redirect(302, mainURL + '/login?error=' + encodeURIComponent('IG server responded. Local service error.'))
+                returnError(res, loginErrLocal)
             }
         } else {
-            res.redirect(302, mainURL + '/login?error=' + encodeURIComponent('Authentication denied by user'))
+            returnError(res, loginErrDenied)
         }
     } else {
-        res.redirect(302, mainURL + '/login?error=' + encodeURIComponent('Missing the "code" param in oauth server response'))
+        returnError(res, loginErrCode)
     }
 }

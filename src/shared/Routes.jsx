@@ -31,17 +31,17 @@ function redirectionsCheck(globalState, routerState, redirect){
     routes.forEach(route => {
         const component = route.component.WrappedComponent || route.component
 
-        if (component.loginRequired && user.id === -1) {
+        if (component.loginRequired && user.accessToken === '') {
             redirected = true
             redirect(getRedirectUrl('/login', location))
         }
 
-        if (component.anonymousRequired && user.id !== -1) {
+        if (component.anonymousRequired && user.accessToken !== '') {
             redirected = true
             // todo - подумать о том что случится, если будет переход на страницу "login"
             // не при помощи набора в адрессной строке (тогда будет простой редирект), а
             // при помощи инструментов router'а - видимо нужно перенаправить юзера откуда
-            // пришел
+            // пришел, а не просто на стартовую страницу
             redirect(getRedirectUrl('/'))
         }
     })
@@ -57,7 +57,9 @@ function onEnter(store){
 
 function onChange(store){
     return function(prevRouterState, nextRouterState, redirect){
-        // onChange is called under query change, we want to omit this
+
+        // onChange is called under every URL change (including query), we want to omit this.
+        // We want only check access if the pathname is changed
         if (prevRouterState.location.pathname !== nextRouterState.location.pathname){
             redirectionsCheck(store.getState(), nextRouterState, redirect)
         }

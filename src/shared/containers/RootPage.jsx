@@ -7,6 +7,8 @@ import {Layout, Menu, Icon} from "antd";
 import {connect} from 'react-redux'
 //local
 import css from "./RootPage.css";
+import {getFollows} from '../actions/followsActions'
+import {getMyProps} from '../actions/userActions'
 
 const {Header, Footer, Sider, Content} = Layout
 
@@ -17,10 +19,16 @@ function TopMenuItem({children, link, icon}) {
 }
 
 class RootPage extends Component {
+
+    componentDidMount(){
+        this.props.dispatch(getFollows())
+        this.props.dispatch(getMyProps())
+    }
+
     render() {
         const {location, children, user} = this.props
 
-        const AUTHED = user.id !== -1
+        const AUTHED = user.accessToken !== ''
 
         return <Layout className={css.main}>
             <Header className={css.header}>
@@ -32,8 +40,13 @@ class RootPage extends Component {
                         mode="horizontal"
                         selectedKeys={[location.pathname, location.pathname.replace(/\/$/, '')]}
                     >
-                        <Menu.Item key="/"><TopMenuItem link="/" icon="contacts">Follows</TopMenuItem></Menu.Item>
-                        <Menu.Item key="/categories"><TopMenuItem link="/categories" icon="tag">Categories</TopMenuItem></Menu.Item>
+                        <Menu.Item key="/">
+                            <TopMenuItem link="/" icon="contacts">Follows</TopMenuItem>
+                        </Menu.Item>
+
+                        <Menu.Item key="/categories">
+                            <TopMenuItem link="/categories" icon="tag">Categories</TopMenuItem>
+                        </Menu.Item>
                     </Menu>
                 </div>}
             </Header>
@@ -45,5 +58,5 @@ class RootPage extends Component {
 }
 
 export default RootPage = connect(state => ({
-    user: state.user
+    user: state.user,
 }))(RootPage)

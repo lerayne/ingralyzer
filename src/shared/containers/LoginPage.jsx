@@ -11,7 +11,7 @@ import igIconWhite from '../images/ig_glyph_white.png'
 
 const loginUrl = url.format({
     protocol:'https:',
-    host: 'api.instagram.com',
+    host: 'www.instagram.com',
     pathname: '/oauth/authorize',
     query: {
         client_id: clientID,

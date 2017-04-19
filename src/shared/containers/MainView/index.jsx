@@ -3,7 +3,6 @@
  */
 import React, {Component} from "react";
 import url from "url";
-import {clientID, mainURL} from "../../../../config";
 import fetchJsonp from "fetch-jsonp";
 
 function LoginPage(){
@@ -15,9 +14,7 @@ function LoginPage(){
 export default class MainView extends Component {
 
     componentDidMount(){
-        window.callbackFunction = function(data){
-            console.log('JSONP', data)
-        }
+
     }
 
     render(){
